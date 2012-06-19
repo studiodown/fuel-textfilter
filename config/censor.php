@@ -24,6 +24,11 @@ return array(
 	 * Would you like to replace the words with placeholder characters?
 	 */
 	'replace_words' => true,
+	
+	/**
+	 * Would you like to limit the replacement of words only when delimited (or setting false allow replacement of any occurences of these words also inside other words, example ASS in massimo) ?
+	 */
+	'boundary' => true,
 
 	/**
 	 * If true, which character?

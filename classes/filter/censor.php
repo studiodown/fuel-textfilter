@@ -34,19 +34,22 @@ class Filter_Censor {
 	public function process($output, $config = array())
 	{
 		$words   = $config['words'];
-		$replace = '';
+		$replace_char = $config['replace_with'];
 
+		if($config['boundary']){
+			$regex = '/\b('.implode('|',$words).')\b/ie';
+		}else{
+    		$regex = '/('.implode('|',$words).')/ie';
+		}
+		
 		if ($config['replace_words'])
 		{
-			$replace = array();
-			$replace_char = $config['replace_with'];
-
-			foreach ($words as $word)
-			{
-				$replace[] = str_repeat($replace_char, strlen($word));
-			}
+			return preg_replace('/\b('.implode('|',$words).')\b/ie', 'str_repeat($replace_char, strlen($1))', $output);
+		}else{
+    		return $output;
 		}		
-		return str_replace($words, $replace, $output);
+		
+		
 	}
 }
 
